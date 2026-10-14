@@ -30,7 +30,6 @@ def page(path,title,desc,crumbs,body,extra_ld=None,faq=None):
 <title>{html.escape(title)} | {B}</title><meta name="description" content="{html.escape(desc)}"><meta name="robots" content="noindex, nofollow">{THEME_HEAD}
 <link rel="canonical" href="{URL}{path}"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="{p}img/brand/favicon.svg" type="image/svg+xml"><link rel="icon" href="{p}img/brand/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="{p}img/brand/icon-180.png"><link rel="stylesheet" href="{p}assets/style.css?v=20261013logos">{ld}</head><body data-root="{p}">
-<div class="sample">Prototype. Official status is read live from public official status pages. Not indexed.</div>
 <header class="top"><div class="wrap row"><a class="logo" href="{p or './'}"><img src="{p}img/brand/wordmark.svg" alt="{B}" height="34"></a><nav>{nav}<a href="{p}fixes/">{icon("wrench",16)}Fixes</a><a href="{p}how-we-check/">{icon("shield-check",16)}How we check</a></nav>{toggle()}</div></header>
 <div class="wrap">{"" if not path else f'<nav class="crumbs" aria-label="Breadcrumb">{cr}</nav>'}
 {body}</div>
