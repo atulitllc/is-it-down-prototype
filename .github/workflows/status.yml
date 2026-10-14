@@ -1,0 +1,21 @@
+name: Status snapshot
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: status-snapshot
+jobs:
+  snap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/fetch_status.py
+      - name: Commit if changed
+        run: |
+          git config user.name "atulitllc"; git config user.email "atulitllc@gmail.com"
+          git add data/status.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Status snapshot"
+          for i in 1 2 3; do git pull --rebase -q && git push && break; sleep 5; done
