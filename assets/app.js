@@ -1,6 +1,6 @@
 const R=document.body.dataset.root,SV=window.SERVICES;
 const href=s=>s.page?R+'status/'+s.slug+'/':R+'category/'+s.cat+'/';
-const mono=s=>`<span class="mono" style="--c:${s.color}">${s.name[0]}</span>`;
+const mono=s=>`<span class="mono lg" style="--c:${s.color}"><img class="flogo" src="https://www.google.com/s2/favicons?domain=${s.domain}&sz=64" alt="${s.name} logo" width="26" height="26" loading="lazy"></span>`;
 const q=document.getElementById('q'),ac=document.getElementById('ac');
 if(q){let i=-1,m=[];const draw=()=>{const v=q.value.trim().toLowerCase();m=v?SV.filter(s=>s.name.toLowerCase().includes(v)||s.cat.includes(v)).slice(0,7):[];
 ac.innerHTML=m.map((s,j)=>`<li class="${j==i?'on':''}"><a href="${href(s)}">${mono(s)}<span><b>${s.name}</b><br><small class="muted">${s.cat}${s.page?'':' · page soon'}</small></span></a></li>`).join('')||(v?'<li class="muted small" style="padding:10px">No match. Try another name.</li>':'');};

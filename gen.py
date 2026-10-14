@@ -1,5 +1,9 @@
 import json,os,html
 B="DownFixer"
+from atulit_gfx import icon,flogo,hero,THEME_HEAD,toggle,CREDIT,install_css
+DOM={"discord":"discord.com","reddit":"reddit.com","chatgpt":"chatgpt.com","claude":"claude.ai","epic-games":"epicgames.com","coinbase":"coinbase.com","robinhood":"robinhood.com","github":"github.com","dropbox":"dropbox.com","figma":"figma.com","atlassian":"atlassian.com","duolingo":"duolingo.com"}
+CATI={"social":"message-circle","ai":"sparkles","gaming":"gamepad-2","banking":"credit-card","work":"briefcase"}
+CATC={"social":"#5865f2","ai":"#0F9D8A","gaming":"#f97316","banking":"#2563eb","work":"#a259ff"}
 # Real services with public official Statuspage JSON APIs (checked Oct 13, 2026)
 S=[("discord","Discord","social","#5865f2","https://discordstatus.com"),("reddit","Reddit","social","#ff4500","https://www.redditstatus.com"),
 ("chatgpt","ChatGPT (OpenAI)","ai","#10a37f","https://status.openai.com"),("claude","Claude","ai","#d97757","https://status.claude.com"),
@@ -9,10 +13,10 @@ S=[("discord","Discord","social","#5865f2","https://discordstatus.com"),("reddit
 ("atlassian","Atlassian (Jira, Confluence)","work","#0052cc","https://status.atlassian.com"),("duolingo","Duolingo","work","#58cc02","https://status.duolingo.com")]
 PAGES=[x[0] for x in S]
 CATS={"social":("Social","Chat and community apps"),"ai":("AI","Chat assistants"),"gaming":("Gaming","Game networks and launchers"),"banking":("Finance","Trading and crypto apps"),"work":("Work and learning","Code, files, design and learning apps")}
-SD={k:{"slug":k,"name":n,"cat":c,"color":col,"page":True,"status":st} for k,n,c,col,st in S}
+SD={k:{"slug":k,"name":n,"cat":c,"color":col,"page":True,"status":st,"domain":DOM[k]} for k,n,c,col,st in S}
 PROB={"social":["Login","Messages not sending","App crashing"],"ai":["No response","Login","Slow answers"],"gaming":["Login","Server disconnects","Store"],"banking":["Login","App crashing","Transfers"],"work":["Login","Sync or upload","App crashing"]}
 URL="https://downfixer.com/"  # canonical apex; SEO head tags are set by seo_site.py
-def mono(s,big=False): return f'<span class="mono{" big" if big else ""}" style="--c:{s["color"]}">{s["name"][0]}</span>'
+def mono(s,big=False): return f'<span class="mono lg{" big" if big else ""}" style="--c:{s["color"]}">{flogo(s["domain"],s["name"],44 if big else 26,not big)}</span>'
 def page(path,title,desc,crumbs,body,extra_ld=None,faq=None):
     d=path.count("/") if path else 0
     p="../"*d
@@ -21,33 +25,33 @@ def page(path,title,desc,crumbs,body,extra_ld=None,faq=None):
     lds=[bl,org]+(extra_ld or [])
     ld="".join(f'<script type="application/ld+json">{json.dumps(x)}</script>' for x in lds)
     cr=" <span>/</span> ".join((f'<a href="{p}{u}">{html.escape(n)}</a>' if i<len(crumbs)-1 else f'<span aria-current="page">{html.escape(n)}</span>') for i,(n,u) in enumerate(crumbs))
-    nav="".join(f'<a href="{p}category/{k}/">{v[0]}</a>' for k,v in CATS.items())
+    nav="".join(f'<a href="{p}category/{k}/">{icon(CATI[k],16)}{v[0]}</a>' for k,v in CATS.items())
     h=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{html.escape(title)} | {B}</title><meta name="description" content="{html.escape(desc)}"><meta name="robots" content="noindex, nofollow">
+<title>{html.escape(title)} | {B}</title><meta name="description" content="{html.escape(desc)}"><meta name="robots" content="noindex, nofollow">{THEME_HEAD}
 <link rel="canonical" href="{URL}{path}"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="{p}img/brand/favicon.svg" type="image/svg+xml"><link rel="icon" href="{p}img/brand/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="{p}img/brand/icon-180.png"><link rel="stylesheet" href="{p}assets/style.css?v=20261013logos">{ld}</head><body data-root="{p}">
 <div class="sample">Prototype. Official status is read live from public official status pages. Not indexed.</div>
-<header class="top"><div class="wrap row"><a class="logo" href="{p}index.html"><img src="{p}img/brand/wordmark.svg" alt="{B}" height="34"></a><nav>{nav}<a href="{p}fixes/">Fixes</a><a href="{p}how-we-check/">How we check</a></nav></div></header>
+<header class="top"><div class="wrap row"><a class="logo" href="{p}index.html"><img src="{p}img/brand/wordmark.svg" alt="{B}" height="34"></a><nav>{nav}<a href="{p}fixes/">{icon("wrench",16)}Fixes</a><a href="{p}how-we-check/">{icon("shield-check",16)}How we check</a></nav>{toggle()}</div></header>
 <div class="wrap">{"" if not path else f'<nav class="crumbs" aria-label="Breadcrumb">{cr}</nav>'}
 {body}</div>
 <footer><div class="wrap row"><div><a class="logo" href="{p}index.html"><img src="{p}img/brand/wordmark.svg" alt="{B}" height="30"></a><p class="muted">Independent status checks by Atulit. Not affiliated with any service listed.</p></div>
-<div class="flinks"><a href="{p}about/">About</a><a href="{p}how-we-check/">How we check</a><a href="{p}fixes/">Fixes guide</a></div></div></footer>
+<div class="flinks"><a href="{p}about/">About</a><a href="{p}how-we-check/">How we check</a><a href="{p}fixes/">Fixes guide</a></div></div><p class="wrap small muted credit">{CREDIT}</p></footer>
 <script>window.SERVICES={json.dumps(list(SD.values()))};</script><script src="{p}assets/app.js"></script></body></html>'''
     os.makedirs(path or ".",exist_ok=True); open((path or "")+"index.html","w").write(h)
 def card(s,p):
     href=f'{p}status/{s["slug"]}/' if s["page"] else f'{p}category/{s["cat"]}/'
-    return f'<a class="svc" href="{href}">{mono(s)}<span><b>{s["name"]}</b><small>{CATS[s["cat"]][0]}{"" if s["page"] else " · page soon"}</small></span><i class="dot"></i></a>'
+    return f'<a class="svc" href="{href}">{mono(s)}<span><b>{s["name"]}</b><small>{CATS[s["cat"]][0]}{"" if s["page"] else " · page soon"}</small></span><span class="st">{icon("activity",16)}<i class="dot"></i></span></a>'
 # HOME
-chips="".join(f'<a class="chip" href="category/{k}/">{v[0]}</a>' for k,v in CATS.items())
+chips="".join(f'<a class="chip" href="category/{k}/">{icon(CATI[k],15)} {v[0]}</a>' for k,v in CATS.items())
 pop="".join(card(SD[k],"") for k in PAGES)
-body=f'''<section class="hero"><p class="eyebrow"><span class="pulse"></span> Live official status from public status pages</p><h1>Is it down,<br>or is it just you?</h1>
+body=f'''<section class="hero hs"><div><p class="eyebrow"><span class="pulse"></span> Live official status from public status pages</p><h1>Is it down,<br>or is it just you?</h1>
 <p class="lead">Search an app to see what its official status page says right now, with the time it was last updated, plus fixes from official help docs.</p>
 <form class="search" id="search" autocomplete="off" role="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="q" placeholder="Try Discord, ChatGPT, GitHub..." aria-label="Search services"><button>Check</button><ul id="ac" role="listbox"></ul></form>
-<div class="chips">{chips}</div></section>
-<div class="grid2"><main><h2>Popular checks</h2><div class="svcs">{pop}</div>
-<h2>Recently checked</h2><p class="muted small">Stored only on this device.</p><div id="recent"></div>
-<h2>Browse by category</h2><div class="cats">{"".join(f'<a href="category/{k}/" class="catcard"><b>{v[0]}</b><span>{v[1]}</span></a>' for k,v in CATS.items())}</div></main>
-<aside><div class="box"><h3>Honest data only</h3><p class="small muted">We never show invented report counts. Charts stay empty until real reports arrive.</p><a href="how-we-check/">How we check</a></div></aside></div>'''
+<div class="chips">{chips}</div></div><div class="hgfx">{hero("downfixer")}</div></section>
+<div class="grid2"><main><h2 class="secdeco" style="--c:#0F9D8A"><span class="ibadge soft">{icon("activity",20)}</span>Popular checks</h2><div class="svcs">{pop}</div>
+<h2 class="secdeco" style="--c:#0E2A3F"><span class="ibadge soft">{icon("clock",20)}</span>Recently checked</h2><p class="muted small">Stored only on this device.</p><div id="recent"></div>
+<h2 class="secdeco" style="--c:#0F9D8A"><span class="ibadge soft">{icon("layers",20)}</span>Browse by category</h2><div class="cats">{"".join(f'<a href="category/{k}/" class="catcard" style="--c:{CATC[k]}"><span class="ibadge sm">{icon(CATI[k],18)}</span><b>{v[0]}</b><span>{v[1]}</span></a>' for k,v in CATS.items())}</div></main>
+<aside><div class="box"><span class="ibadge sm" style="--c:#0F9D8A">{icon("shield-check",18)}</span><h3>Honest data only</h3><p class="small muted">We never show invented report counts. Charts stay empty until real reports arrive.</p><a href="how-we-check/">How we check</a></div></aside></div>'''
 page("","Is It Down or Just You? Live Checks & Fixes","Check if popular apps are down for everyone or just you, run a live check from your own browser, and get step by step fixes for web, iPhone and Android.",[("Home","")],body,[{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":i+1,"url":URL+f"status/{k}/","name":SD[k]["name"]} for i,k in enumerate(PAGES)]}])
 # SERVICE
 APPLE_CLOSE="https://support.apple.com/en-us/109359"; APPLE_UPD="https://support.apple.com/en-us/102629"; GPLAY="https://support.google.com/googleplay/answer/7513003?hl=en"
@@ -116,3 +120,10 @@ for k in PAGES:
     page(f"fix/{k}/error-500/",f"{n} Error 500: What It Means & How to Fix It",f"{n} error 500 explained.",[("Home",""),(n,f"status/{k}/"),("Error 500",f"fix/{k}/error-500/")],body)
 
 import seo_site; seo_site.build()
+install_css("assets/style.css",""".hero.hs{display:grid;grid-template-columns:1.25fr 1fr;gap:30px;align-items:center;text-align:left}.hs .lead{margin-left:0}.hs .search{margin:0}.hs .chips{justify-content:flex-start}.hs .chip{display:inline-flex;align-items:center;gap:6px}.hs .chip .ic{opacity:.7}
+.mono.lg{background:#fff;border:1px solid #e5e7eb}.svc .mono{flex:none;display:grid}.svc .st{flex:none;flex-direction:row;display:flex;align-items:center;gap:6px;color:#94a3b8}
+.catcard{gap:4px}.catcard .ibadge{margin-bottom:6px}.catcard:hover{text-decoration:none;border-color:var(--c)}.box .ibadge{margin-bottom:8px}.credit{margin-top:6px;padding-bottom:16px}
+@media(max-width:860px){.hero.hs{grid-template-columns:1fr}.hgfx{order:-1}.hgfx .hero-gfx{max-width:260px}.hero.hs h1{font-size:44px}}
+html[data-theme=dark] .sample{background:#2a2410;color:#fcd34d}
+""")
+
