@@ -40,7 +40,7 @@ def page(path,title,desc,crumbs,body,extra_ld=None,faq=None):
     os.makedirs(path or ".",exist_ok=True); open((path or "")+"index.html","w").write(h)
 def card(s,p):
     href=f'{p}status/{s["slug"]}/' if s["page"] else f'{p}category/{s["cat"]}/'
-    return f'<a class="svc" href="{href}">{mono(s)}<span><b>{s["name"]}</b><small>{CATS[s["cat"]][0]}{"" if s["page"] else " · page soon"}</small></span><span class="st">{icon("activity",16)}<i class="dot"></i></span></a>'
+    return f'<a class="svc" href="{href}">{mono(s)}<span><b>{s["name"]}</b><small>{CATS[s["cat"]][0]}{"" if s["page"] else " · page soon"}</small></span><span class="st">{icon("activity",16)}<i class="dot" data-k="{s["slug"]}" title="Checking status"></i></span></a>'
 # HOME
 chips="".join(f'<a class="chip" href="category/{k}/">{icon(CATI[k],15)} {v[0]}</a>' for k,v in CATS.items())
 pop="".join(card(SD[k],"") for k in PAGES)
@@ -48,7 +48,7 @@ body=f'''<section class="hero hs"><div><p class="eyebrow"><span class="pulse"></
 <p class="lead">Search an app to see what its official status page says right now, with the time it was last updated, plus fixes from official help docs.</p>
 <form class="search" id="search" autocomplete="off" role="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="q" placeholder="Try Discord, ChatGPT, GitHub..." aria-label="Search services"><button>Check</button><ul id="ac" role="listbox"></ul></form>
 <div class="chips">{chips}</div></div><div class="hgfx">{hero("downfixer")}</div></section>
-<div class="grid2"><main><h2 class="secdeco" style="--c:#0F9D8A"><span class="ibadge soft">{icon("activity",20)}</span>Popular checks</h2><div class="svcs">{pop}</div>
+<div class="grid2"><main><h2 class="secdeco" style="--c:#0F9D8A"><span class="ibadge soft">{icon("activity",20)}</span>Popular checks</h2><div class="svcs">{pop}</div><script>fetch('data/status.json',{{cache:'no-store'}}).then(r=>r.json()).then(j=>{{const M={{none:['ok','Up and working'],minor:['warn','Minor issues'],maintenance:['warn','Maintenance'],major:['bad','Major outage'],critical:['bad','Major outage']}};document.querySelectorAll('.svcs .dot[data-k]').forEach(d=>{{const e=j.services[d.dataset.k];if(e&&e.data){{const m=M[e.data.status.indicator];if(m){{d.classList.add(m[0]);d.title=m[1]}}}}}})}}).catch(()=>{{}})</script>
 <h2 class="secdeco" style="--c:#0E2A3F"><span class="ibadge soft">{icon("clock",20)}</span>Recently checked</h2><p class="muted small">Stored only on this device.</p><div id="recent"></div>
 <h2 class="secdeco" style="--c:#0F9D8A"><span class="ibadge soft">{icon("layers",20)}</span>Browse by category</h2><div class="cats">{"".join(f'<a href="category/{k}/" class="catcard" style="--c:{CATC[k]}"><span class="ibadge sm">{icon(CATI[k],18)}</span><b>{v[0]}</b><span>{v[1]}</span></a>' for k,v in CATS.items())}</div></main>
 <aside><div class="box"><span class="ibadge sm" style="--c:#0F9D8A">{icon("shield-check",18)}</span><h3>Honest data only</h3><p class="small muted">We never show invented report counts. Charts stay empty until real reports arrive.</p><a href="how-we-check/">How we check</a></div></aside></div>'''
