@@ -7,14 +7,15 @@ ac.innerHTML=m.map((s,j)=>`<li class="${j==i?'on':''}"><a href="${href(s)}">${mo
 q.oninput=()=>{i=-1;draw()};q.onkeydown=e=>{if(e.key=='ArrowDown'){i=Math.min(i+1,m.length-1);draw();e.preventDefault()}if(e.key=='ArrowUp'){i=Math.max(i-1,0);draw();e.preventDefault()}};
 document.getElementById('search').onsubmit=e=>{e.preventDefault();const s=m[Math.max(i,0)];if(s)location.href=href(s)};}
 const rec=document.getElementById('recent');
-if(rec){const l=JSON.parse(localStorage.getItem('df_recent')||'[]');rec.innerHTML=l.length?'<div class="svcs">'+l.map(r=>{const s=SV.find(x=>x.slug==r.slug);return `<a class="svc" href="${href(s)}">${mono(s)}<span><b>${s.name}</b><small>${r.ms} ms · ${new Date(r.t).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}</small></span><i class="dot ok"></i></a>`}).join('')+'</div>':'<div class="empty-r"><b>Nothing checked yet</b><br><span class="small">Services you check appear here.</span></div>';}
-function ping(cb){const t=performance.now(),img=new Image(),done=()=>cb(Math.round(performance.now()-t));img.onload=img.onerror=done;img.src='https://example.com/favicon.ico?t='+Date.now();}
+if(rec){const l=JSON.parse(localStorage.getItem('df_recent')||'[]');rec.innerHTML=l.length?'<div class="svcs">'+l.map(r=>{const s=SV.find(x=>x.slug==r.slug);return `<a class="svc" href="${href(s)}">${mono(s)}<span><b>${s.name}</b><small>Viewed ${new Date(r.t).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}</small></span></a>`}).join('')+'</div>':'<div class="empty-r"><b>Nothing checked yet</b><br><span class="small">Services you check appear here.</span></div>';}
+const fmt=t=>new Date(t).toLocaleString([], {month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+const IND={none:'ok',minor:'warn',major:'bad',critical:'bad',maintenance:'warn'};
 const st=document.getElementById('status');
-if(st){const slug=st.dataset.slug,b=document.getElementById('check'),v=document.getElementById('verdict');
-const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'your region';document.getElementById('rg').textContent=tz.split('/').pop().replace(/_/g,' ');
-b.onclick=()=>{b.textContent='Checking...';b.disabled=true;ping(ms=>{b.textContent='Check again';b.disabled=false;
-document.getElementById('rt').textContent=ms+' ms';document.getElementById('lc').textContent=new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit',second:'2-digit'});
-v.innerHTML='<i class="dot ok"></i><span>Our check from your browser responded. See official status for service wide issues.</span>';
-let l=JSON.parse(localStorage.getItem('df_recent')||'[]').filter(r=>r.slug!=slug);l.unshift({slug,ms,t:Date.now()});localStorage.setItem('df_recent',JSON.stringify(l.slice(0,6)));});};
+if(st){const slug=st.dataset.slug,api=st.dataset.api,b=document.getElementById('check'),v=document.getElementById('verdict');
+const show=(d,fetched,snap)=>{v.innerHTML=`<i class="dot ${IND[d.status.indicator]||'idle'}"></i><span>${d.page.name} official status: ${d.status.description}${snap?' (saved snapshot)':''}</span>`;
+document.getElementById('rt').textContent=d.status.description;document.getElementById('lc').textContent=fmt(d.page.updated_at);document.getElementById('rg').textContent=fmt(fetched);};
+const snap=()=>fetch(R+'data/status.json',{cache:'no-store'}).then(r=>r.json()).then(j=>{const e=j.services[slug];if(e&&e.data)show(e.data,e.fetched_at,true);else throw 0}).catch(()=>{v.innerHTML='<i class="dot idle"></i><span>Could not load the official status. Use the status page link below.</span>'});
+const live=()=>{b.textContent='Checking...';b.disabled=true;fetch(api,{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>show(d,Date.now(),false)).catch(snap).finally(()=>{b.textContent='Check again';b.disabled=false;
+let l=JSON.parse(localStorage.getItem('df_recent')||'[]').filter(r=>r.slug!=slug);l.unshift({slug,t:Date.now()});localStorage.setItem('df_recent',JSON.stringify(l.slice(0,6)));});};
+b.onclick=live;live();
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab,.pane').forEach(x=>x.classList.toggle('on',x.dataset.t==t.dataset.t))});}
-const cf=document.getElementById('cform');if(cf)cf.onsubmit=e=>{e.preventDefault();ping(ms=>document.getElementById('cres').textContent='Demo check: example.com answered in '+ms+' ms.')};
