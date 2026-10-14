@@ -38,8 +38,8 @@ def build():
     for a, b in [("favicon.svg", "favicon.svg"), ("favicon-32.png", "favicon-32.png"), ("icon-180.png", "apple-touch-icon.png"), ("icon-512.png", "icon-512.png")]:
         shutil.copy(f"{LOGOS}/{a}", f"{ROOT}/img/brand/{b}")
     site = seo.Site(ROOT, "DownFixer", "downfixer.com", "is-it-down-prototype", INDEXABLE, "Oct 13, 2026", "2026-10-13",
-        "Independent status checks by Atulit. Not affiliated with any service listed. Sample data prototype.",
+        "Independent status checks by Atulit. Not affiliated with any service listed. Status read from official status pages.",
         f"{LOGOS}/wordmark-1200.png", "img/brand/icon-512.png",
-        ["Sample data prototype.", "Updated Oct 13, 2026.", "From DownFixer.", "Not affiliated with any service listed.", "Free and independent.", "No fake counts.", "Live checks.", "Fixes for web, iPhone and Android."], hook)
+        ["Official status pages.", "Updated Oct 13, 2026.", "From DownFixer.", "Not affiliated with any service listed.", "Free and independent.", "No fake counts.", "Live official status.", "Fixes for web, iPhone and Android."], hook)
     return seo.run(site)
 if __name__ == "__main__": build()
