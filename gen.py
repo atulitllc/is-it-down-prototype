@@ -10,7 +10,7 @@ CATS={"social":("Social","Feeds, messaging and photo apps"),"streaming":("Stream
 SD={k:{"slug":k,"name":n,"cat":c,"color":col,"page":k in PAGES} for k,n,c,col in S}
 PROB={"social":["Feed not loading","Login","Messages not sending","Notifications","Photo upload"],"streaming":["Video buffering","Login","App crashing","Playback error","Downloads"],
 "gaming":["Matchmaking","Login","Server disconnects","Store","Voice chat"],"ai":["No response","Login","Slow answers","File upload","Image generation"],"banking":["Login","Card payments","Transfers","App crashing","Balance not updating"]}
-URL="https://atulitllc.github.io/is-it-down-prototype/"
+URL="https://downfixer.com/"  # canonical apex; SEO head tags are set by seo_site.py
 def mono(s,big=False): return f'<span class="mono{" big" if big else ""}" style="--c:{s["color"]}">{s["name"][0]}</span>'
 def page(path,title,desc,crumbs,body,extra_ld=None,faq=None):
     d=path.count("/") if path else 0
@@ -47,7 +47,7 @@ body=f'''<section class="hero"><p class="eyebrow"><span class="pulse"></span> Li
 <h2>Recently checked</h2><p class="muted small">Stored only on this device.</p><div id="recent"></div>
 <h2>Browse by category</h2><div class="cats">{"".join(f'<a href="category/{k}/" class="catcard"><b>{v[0]}</b><span>{v[1]}</span></a>' for k,v in CATS.items())}</div></main>
 <aside><div class="box"><h3>Honest data only</h3><p class="small muted">We never show invented report counts. Charts stay empty until real reports arrive.</p><a href="how-we-check/">How we check</a></div></aside></div>'''
-page("","Is it down? Official status + our live check","Check if popular apps are down.",[("Home","")],body,[{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":i+1,"url":URL+f"status/{k}/","name":SD[k]["name"]} for i,k in enumerate(PAGES)]}])
+page("","Is It Down or Just You? Live Checks & Fixes","Check if popular apps are down for everyone or just you, run a live check from your own browser, and get step by step fixes for web, iPhone and Android.",[("Home","")],body,[{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":i+1,"url":URL+f"status/{k}/","name":SD[k]["name"]} for i,k in enumerate(PAGES)]}])
 # SERVICE
 def fixes(s):
     n=s["name"]
@@ -65,7 +65,7 @@ for k in PAGES:
     ticks="".join(f'<text x="{40+i*80}" y="196">{["24h ago","20h","16h","12h","8h","4h","Now"][i]}</text>' for i in range(7))
     grid="".join(f'<line x1="40" x2="520" y1="{y}" y2="{y}"/>' for y in (30,80,130,180))
     strip="".join('<i></i>' for _ in range(90))
-    faqq=[(f"Is {n} down right now?",f"Press Check now to run a live test from your browser. Community reports for {n} appear above when people submit them."),(f"Why does {n} work for others but not me?","Local issues such as cache, network or an outdated app are the most common cause. Try the fixes for your device.")]
+    faqq=[(f"Is {n} down right now?",f"Press Check now to run a live test from your browser. We do not collect community reports yet, so we show none rather than guess."),(f"Why does {n} work for others but not me?","Local issues such as cache, network or an outdated app are the most common cause. Try the fixes for your device.")]
     faqh="".join(f"<details><summary>{q}</summary><p>{a}</p></details>" for q,a in faqq)
     body=f'''<div class="grid2"><main>
 <section class="status" id="status" data-slug="{k}">{mono(s,True)}<div class="st"><p class="eyebrow">{CATS[c][0]} status</p><h1>Is {n} down?</h1><p class="small muted">Not affiliated with {n}. Sample data.</p>
@@ -73,13 +73,11 @@ for k in PAGES:
 <div class="metrics"><div><small>Response time</small><b id="rt">--</b></div><div><small>Last checked</small><b id="lc">Never</b></div><div><small>Our check from</small><b id="rg">Your browser</b></div></div>
 <div class="act"><button class="btn" id="check">Check now</button><a class="btn ghost" href="{p}fix/{k}/login/">Top fixes</a></div>
 <p class="small muted">Our check alone never means down for everyone. Demo check: times a request from your browser to example.com. It does not contact {n}.</p></div></section>
-<section class="panel off"><div class="ph"><h2>Official status</h2><span class="tag">Sample</span></div><p class="verdict"><i class="dot"></i><span>All systems operational (sample feed)</span></p><p class="small muted">Source: <a href="https://example.com/" rel="nofollow">{n} official status page</a> · checked Oct 13, 2026, 8:30 PM ET</p></section>
+<section class="panel off"><div class="ph"><h2>Official status</h2><span class="tag">Not connected</span></div><p class="verdict"><i class="dot idle"></i><span>We do not read the official {n} status feed yet, so we show no status here.</span></p><p class="small muted">Check it directly: <a href="https://example.com/" rel="nofollow">{n} official status page</a></p></section>
 
 <section class="panel"><div class="ph"><h2>User reports, last 24 hours</h2><span class="tag">Not collected yet</span></div>
-<div class="chart"><svg viewBox="0 0 540 205"><g class="grid">{grid}</g><g class="ax"><text x="30" y="34">High</text><text x="30" y="184">0</text>{ticks}</g></svg>
-<div class="empty"><b>No reports in the last 24 hours</b><span>We do not collect user reports yet, so we show none.</span></div></div></section>
-<section class="panel"><div class="ph"><h2>90 day history</h2><span class="tag">History starts Oct 13, 2026</span></div>
-<div class="strip">{strip}</div><div class="sl"><span>90 days ago</span><span>Today</span></div><p class="small muted">No incidents recorded yet. History combines the official status feed and our probes, starting Oct 13, 2026.</p></section>
+<p class="small muted"><b>No user reports shown.</b> We do not collect user reports yet, so we show no counts and no chart.</p></section>
+
 <section class="panel"><h2>Common problems</h2><ul class="probs">{"".join(f"<li><b>{x}</b><span>See the fixes below</span></li>" for x in pr)}</ul></section>
 <section class="panel"><h2>How to fix {n}</h2><div class="tabs">{tabs}</div>{panes}<p class="small"><a href="{p}fixes/">Full fixes guide</a></p></section>
 <section class="panel"><h2>Questions</h2>{faqh}</section></main>
@@ -99,19 +97,23 @@ G=[("Start here",["Run Check now on the service page. If the check passes and th
 ("Android",["Force stop the app and clear its cache.","Toggle mobile data and WiFi.","Update from Google Play.","Restart the phone in safe mode to test for conflicts."]),
 ("Network and router",["Restart your router and modem, wait 30 seconds.","Change DNS to your provider default or a public resolver.","Turn off VPN or proxy temporarily."])]
 body='<h1>Fixes guide</h1><p class="lead">Step by step fixes that work for most apps when it is just you.</p><div class="grid2"><main>'+"".join(f'<section class="panel"><h2>{h}</h2><ol class="steps on">'+"".join(f"<li>{x}</li>" for x in l)+"</ol></section>" for h,l in G)+'</main></div>'
+body=body.replace('</main></div>','<section class="panel"><h2>Fixes by service</h2><ul>'+"".join(f'<li><a href="../status/{k}/">{SD[k]["name"]} status</a> · <a href="../fix/{k}/login/">login</a> · <a href="../fix/{k}/app-crashing/">app crashing</a> · <a href="../fix/{k}/error-500/">error 500</a></li>' for k in PAGES)+'</ul><p><a href="../errors/500/">Error 500 explained</a></p></section></main></div>')
 page("fixes/","Fixes guide","Fix apps that are not working.",[("Home",""),("Fixes guide","fixes/")],body)
-page("about/","About","About "+B,[("Home",""),("About","about/")],f'<div class="prose"><h1>About {B}</h1><p class="lead">{B} is an Atulit project that helps you work out in seconds whether an app is down for everyone or just for you.</p><p>We are funded by ads, clearly labeled, and never placed inside status widgets or charts. We are not affiliated with the services listed.</p><p>We publish only real data. If nobody has reported a problem, you will see an empty chart, not an invented number.</p></div>')
+page("errors/500/","Error 500 Internal Server Error: What It Means","",[("Home",""),("Fixes guide","fixes/"),("Error 500","errors/500/")],'<div class="prose"><h1>Error 500 Internal Server Error: What It Means</h1><p class="lead">An HTTP 500 error means the server hit an unexpected problem while handling your request. It is almost always on the service side, not your device.</p><ol class="steps on"><li>Wait two minutes, then reload the page.</li><li>Check the service status page here or the official status page.</li><li>Sign out and back in, or try a private window.</li><li>If it keeps happening, contact the service through its official help channels.</li></ol><h2>Service specific pages</h2><ul>'+"".join(f'<li><a href="../../fix/{k}/error-500/">{SD[k]["name"]} error 500</a></li>' for k in PAGES)+'</ul><p><a href="../../fixes/">Full fixes guide</a></p></div>')
+page("about/","About","About "+B,[("Home",""),("About","about/")],f'<div class="prose"><h1>About {B}</h1><p class="lead">{B} is an Atulit project that helps you work out in seconds whether an app is down for everyone or just for you.</p><p>We plan to fund the site with clearly labeled ads once it has real traffic. Ads will never sit inside status widgets. We are not affiliated with the services listed.</p><p>We publish only real data. If nobody has reported a problem, you will see an empty chart, not an invented number.</p></div>')
 page("how-we-check/","How we check","Methodology",[("Home",""),("How we check","how-we-check/")],'<div class="prose"><h1>How we check</h1><p class="lead">Three signals, shown honestly.</p><div class="steps3"><div class="box"><b>1. Your browser</b><p class="small">Check now times a request from your device. In this prototype it pings example.com as a demo.</p></div><div class="box"><b>2. Community reports</b><p class="small">Reports you submit are counted per hour. Empty means nobody reported.</p></div><div class="box"><b>3. Official status</b><p class="small">We link to each service\'s own status page.</p></div></div><h2>What we never do</h2><ul><li>Show estimated or placeholder report counts.</li><li>Back fill outage history before tracking began.</li></ul></div>')
-open("robots.txt","w").write("User-agent: *\nDisallow: /\n");open(".nojekyll","w").write("")
+open(".nojekyll","w").write("")
 
 ISS=[("login","Login","Web"),("app-crashing","App crashing","iPhone")]
 for k in PAGES:
     s=SD[k];n=s["name"]
     for slug,iss,plat in ISS:
         st=fixes(s)[plat]
-        body=f'<div class="prose"><h1>{n} not working? {len(st)} fixes for {iss} ({plat})</h1><p class="small muted">Tested on iPhone 15 and Chrome 129, Oct 13, 2026. Not affiliated with {n}. Steps ordered quick to drastic.</p><section class="panel"><ol class="steps on">'+"".join(f"<li>{x}</li>" for x in st)+f'</ol><p class="small">Source: <a href="https://example.com/" rel="nofollow">{n} official help center</a></p></section><p><a href="../../../status/{k}/">Back to {n} status</a> · <a href="../error-500/">{n} error 500</a></p></div>'
+        body=f'<div class="prose"><h1>{n} not working? {len(st)} fixes for {iss} ({plat})</h1><p class="small muted">General steps that apply to most apps, ordered quick to drastic. Not verified against {n} specifically. Not affiliated with {n}. Updated Oct 13, 2026.</p><section class="panel"><ol class="steps on">'+"".join(f"<li>{x}</li>" for x in st)+f'</ol><p class="small">Source: <a href="https://example.com/" rel="nofollow">{n} official help center</a></p></section><p><a href="../../../status/{k}/">Back to {n} status</a> · <a href="../error-500/">{n} error 500</a> · <a href="../../../errors/500/">Error 500 explained</a></p></div>'
         ht={"@context":"https://schema.org","@type":"HowTo","name":f"Fix {n} {iss}","step":[{"@type":"HowToStep","text":x} for x in st]}
         page(f"fix/{k}/{slug}/",f"{n} Not Working? {len(st)} Fixes for {iss} ({plat})",f"Fixes for {n} {iss}.",[("Home",""),(n,f"status/{k}/"),(iss,f"fix/{k}/{slug}/")],body,[ht])
-    body=f'<div class="prose"><h1>{n} error 500: what it means and how to fix it</h1><p>Error 500 means {n} servers hit an unexpected problem. It is usually on their side. Check the official status, wait a few minutes, then retry.</p><ol class="steps on"><li>Reload after 2 minutes.</li><li>Check <a href="../../../status/{k}/">{n} status</a>.</li><li>Sign out and back in.</li><li>Contact {n} via official help channels only: <a href="https://example.com/" rel="nofollow">help center</a>.</li></ol><p>Related: <a href="../login/">Login fixes</a> · <a href="../app-crashing/">App crashing</a></p></div>'
+    body=f'<div class="prose"><h1>{n} error 500: what it means and how to fix it</h1><p>Error 500 means {n} servers hit an unexpected problem. It is usually on their side. Check the official status, wait a few minutes, then retry.</p><ol class="steps on"><li>Reload after 2 minutes.</li><li>Check <a href="../../../status/{k}/">{n} status</a>.</li><li>Sign out and back in.</li><li>Contact {n} via official help channels only: <a href="https://example.com/" rel="nofollow">help center</a>.</li></ol><p>Related: <a href="../login/">Login fixes</a> · <a href="../app-crashing/">App crashing</a> · <a href="../../../errors/500/">What error 500 means on any site</a></p></div>'
     page(f"fix/{k}/error-500/",f"{n} Error 500: What It Means & How to Fix It",f"{n} error 500 explained.",[("Home",""),(n,f"status/{k}/"),("Error 500",f"fix/{k}/error-500/")],body)
 page("check/","Check any site","Run a demo check.",[("Home",""),("Check","check/")],'<div class="prose"><h1>Check any site</h1><form class="search" id="cform"><input id="curl" placeholder="https://example.com"><button>Check</button></form><p id="cres" class="lead"></p><p class="small muted">Demo check from your browser. Never means down for everyone.</p></div>')
+
+import seo_site; seo_site.build()
