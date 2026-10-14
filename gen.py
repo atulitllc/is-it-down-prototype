@@ -77,8 +77,7 @@ for k in PAGES:
 <div class="act"><button class="btn" id="check">Check now</button><a class="btn ghost" href="{p}fix/{k}/login/">Top fixes</a></div>
 <p class="small muted">Our check alone never means down for everyone. Demo check: times a request from your browser to example.com. It does not contact {n}.</p></div></section>
 <section class="panel off"><div class="ph"><h2>Official status</h2><span class="tag">Sample</span></div><p class="verdict"><i class="dot"></i><span>All systems operational (sample feed)</span></p><p class="small muted">Source: <a href="https://example.com/" rel="nofollow">{n} official status page</a> · checked Oct 13, 2026, 8:30 PM ET</p></section>
-<!--rep<h3>What is not working?</h3><div class="chips">{chipsr}</div><div class="act"><button class="btn" id="sendrep" disabled>Submit report</button><button class="btn ghost" id="cancelrep">Cancel</button></div><p class="small muted">Saved on this device only in this prototype.</p></section>
--->
+
 <section class="panel"><div class="ph"><h2>User reports, last 24 hours</h2><span class="tag">Not collected yet</span></div>
 <div class="chart"><svg viewBox="0 0 540 205"><g class="grid">{grid}</g><g class="ax"><text x="30" y="34">High</text><text x="30" y="184">0</text>{ticks}</g></svg>
 <div class="empty"><b>No reports in the last 24 hours</b><span>We do not collect user reports yet, so we show none.</span></div></div></section>
