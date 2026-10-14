@@ -16,7 +16,7 @@ def page(path,title,desc,crumbs,body,extra_ld=None,faq=None):
     d=path.count("/") if path else 0
     p="../"*d
     bl={"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":i+1,"name":n,"item":URL+u} for i,(n,u) in enumerate(crumbs)]}
-    org={"@context":"https://schema.org","@type":"Organization","name":B,"url":URL,"parentOrganization":{"@type":"Organization","name":"Atulit"}}
+    org={"@context":"https://schema.org","@type":"Organization","name":B,"url":URL,"logo":URL+"img/brand/icon-512.png","parentOrganization":{"@type":"Organization","name":"Atulit"}}
     lds=[bl,org]+(extra_ld or [])
     ld="".join(f'<script type="application/ld+json">{json.dumps(x)}</script>' for x in lds)
     cr=" <span>/</span> ".join((f'<a href="{p}{u}">{html.escape(n)}</a>' if i<len(crumbs)-1 else f'<span aria-current="page">{html.escape(n)}</span>') for i,(n,u) in enumerate(crumbs))
@@ -24,12 +24,12 @@ def page(path,title,desc,crumbs,body,extra_ld=None,faq=None):
     h=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{html.escape(title)} | {B}</title><meta name="description" content="{html.escape(desc)}"><meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="{URL}{path}"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{p}assets/style.css?v=20261013noads">{ld}</head><body data-root="{p}">
+<link rel="icon" href="{p}img/brand/favicon.svg" type="image/svg+xml"><link rel="icon" href="{p}img/brand/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="{p}img/brand/icon-180.png"><link rel="stylesheet" href="{p}assets/style.css?v=20261013logos">{ld}</head><body data-root="{p}">
 <div class="sample">Sample data prototype. Services are fictional; status checks are demos.</div>
-<header class="top"><div class="wrap row"><a class="logo" href="{p}index.html"><span class="pulse"></span>{B}</a><nav>{nav}<a href="{p}fixes/">Fixes</a><a href="{p}how-we-check/">How we check</a></nav></div></header>
+<header class="top"><div class="wrap row"><a class="logo" href="{p}index.html"><img src="{p}img/brand/wordmark.svg" alt="{B}" height="34"></a><nav>{nav}<a href="{p}fixes/">Fixes</a><a href="{p}how-we-check/">How we check</a></nav></div></header>
 <div class="wrap">{"" if not path else f'<nav class="crumbs" aria-label="Breadcrumb">{cr}</nav>'}
 {body}</div>
-<footer><div class="wrap row"><div><a class="logo" href="{p}index.html"><span class="pulse"></span>{B}</a><p class="muted">Independent status checks by Atulit. Not affiliated with any service listed.</p></div>
+<footer><div class="wrap row"><div><a class="logo" href="{p}index.html"><img src="{p}img/brand/wordmark.svg" alt="{B}" height="30"></a><p class="muted">Independent status checks by Atulit. Not affiliated with any service listed.</p></div>
 <div class="flinks"><a href="{p}about/">About</a><a href="{p}how-we-check/">How we check</a><a href="{p}fixes/">Fixes guide</a></div></div></footer>
 <script>window.SERVICES={json.dumps(list(SD.values()))};</script><script src="{p}assets/app.js"></script></body></html>'''
     os.makedirs(path or ".",exist_ok=True); open((path or "")+"index.html","w").write(h)
