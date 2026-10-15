@@ -1,6 +1,6 @@
 """DownFixer SEO config. INDEXABLE gates robots meta and sitemap for the whole site."""
 import os, re, shutil, sys
-INDEXABLE = False
+INDEXABLE = True
 ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ROOT); import seo
 LOGOS = "/workspace/atulit-logos/downfixer"
