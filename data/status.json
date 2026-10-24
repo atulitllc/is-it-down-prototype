@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-23T22:31:36+00:00",
+ "generated_at": "2026-10-24T01:04:16+00:00",
  "services": {
   "discord": {
    "source": "https://discordstatus.com/api/v2/status.json",
@@ -13,7 +13,7 @@
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-23T22:31:37+00:00"
+   "fetched_at": "2026-10-24T01:04:16+00:00"
   },
   "reddit": {
    "source": "https://www.redditstatus.com/api/v2/status.json",
@@ -27,7 +27,7 @@
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-23T22:31:37+00:00"
+   "fetched_at": "2026-10-24T01:04:16+00:00"
   },
   "chatgpt": {
    "source": "https://status.openai.com/api/v2/status.json",
@@ -41,21 +41,21 @@
      "indicator": "none"
     }
    },
-   "fetched_at": "2026-10-23T22:31:37+00:00"
+   "fetched_at": "2026-10-24T01:04:17+00:00"
   },
   "claude": {
    "source": "https://status.claude.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "Claude",
-     "updated_at": "2026-10-23T22:24:43.516Z"
+     "updated_at": "2026-10-24T00:40:22.523Z"
     },
     "status": {
      "indicator": "none",
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-23T22:31:37+00:00"
+   "fetched_at": "2026-10-24T01:04:17+00:00"
   },
   "epic-games": {
    "source": "https://status.epicgames.com/api/v2/status.json",
@@ -69,49 +69,49 @@
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-23T22:31:37+00:00"
+   "fetched_at": "2026-10-24T01:04:17+00:00"
   },
   "coinbase": {
    "source": "https://status.coinbase.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "Coinbase",
-     "updated_at": "2026-10-23T10:00:07.999-07:00"
+     "updated_at": "2026-10-23T15:43:35.732-07:00"
     },
     "status": {
      "indicator": "maintenance",
      "description": "Service Under Maintenance"
     }
    },
-   "fetched_at": "2026-10-23T22:31:37+00:00"
+   "fetched_at": "2026-10-24T01:04:17+00:00"
   },
   "robinhood": {
    "source": "https://status.robinhood.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "Robinhood",
-     "updated_at": "2026-10-23T15:24:10.821-07:00"
+     "updated_at": "2026-10-23T16:04:00.418-07:00"
     },
     "status": {
      "indicator": "none",
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-23T22:31:38+00:00"
+   "fetched_at": "2026-10-24T01:04:17+00:00"
   },
   "github": {
    "source": "https://www.githubstatus.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "GitHub",
-     "updated_at": "2026-10-23T22:24:21.486Z"
+     "updated_at": "2026-10-24T00:38:25.307Z"
     },
     "status": {
      "indicator": "none",
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-23T22:31:38+00:00"
+   "fetched_at": "2026-10-24T01:04:17+00:00"
   },
   "dropbox": {
    "source": "https://status.dropbox.com/api/v2/status.json",
@@ -125,21 +125,21 @@
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-23T22:31:38+00:00"
+   "fetched_at": "2026-10-24T01:04:17+00:00"
   },
   "figma": {
    "source": "https://status.figma.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "Figma",
-     "updated_at": "2026-10-23T22:24:10.817Z"
+     "updated_at": "2026-10-23T23:04:00.505Z"
     },
     "status": {
      "indicator": "none",
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-23T22:31:38+00:00"
+   "fetched_at": "2026-10-24T01:04:17+00:00"
   },
   "atlassian": {
    "source": "https://status.atlassian.com/api/v2/status.json",
@@ -153,21 +153,21 @@
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-23T22:31:38+00:00"
+   "fetched_at": "2026-10-24T01:04:18+00:00"
   },
   "duolingo": {
    "source": "https://status.duolingo.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "Duolingo",
-     "updated_at": "2026-10-23T18:24:12.502-04:00"
+     "updated_at": "2026-10-23T19:04:01.699-04:00"
     },
     "status": {
      "indicator": "none",
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-23T22:31:38+00:00"
+   "fetched_at": "2026-10-24T01:04:18+00:00"
   }
  }
 }
