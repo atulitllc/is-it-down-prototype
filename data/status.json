@@ -1,33 +1,33 @@
 {
- "generated_at": "2026-10-30T05:43:01+00:00",
+ "generated_at": "2026-10-30T11:40:09+00:00",
  "services": {
   "discord": {
    "source": "https://discordstatus.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "Discord",
-     "updated_at": "2026-10-29T17:04:45.472-07:00"
+     "updated_at": "2026-10-30T02:19:16.547-07:00"
     },
     "status": {
      "indicator": "none",
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-30T05:43:01+00:00"
+   "fetched_at": "2026-10-30T11:40:09+00:00"
   },
   "reddit": {
    "source": "https://www.redditstatus.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "Reddit",
-     "updated_at": "2026-10-29T17:04:43.541-07:00"
+     "updated_at": "2026-10-30T02:19:14.480-07:00"
     },
     "status": {
      "indicator": "none",
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-30T05:43:01+00:00"
+   "fetched_at": "2026-10-30T11:40:09+00:00"
   },
   "chatgpt": {
    "source": "https://status.openai.com/api/v2/status.json",
@@ -41,35 +41,35 @@
      "indicator": "none"
     }
    },
-   "fetched_at": "2026-10-30T05:43:01+00:00"
+   "fetched_at": "2026-10-30T11:40:10+00:00"
   },
   "claude": {
    "source": "https://status.claude.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "Claude",
-     "updated_at": "2026-10-30T00:04:59.510Z"
+     "updated_at": "2026-10-30T09:19:29.664Z"
     },
     "status": {
      "indicator": "none",
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-30T05:43:01+00:00"
+   "fetched_at": "2026-10-30T11:40:10+00:00"
   },
   "epic-games": {
    "source": "https://status.epicgames.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "Epic Games Public",
-     "updated_at": "2026-10-30T00:39:08.972Z"
+     "updated_at": "2026-10-30T09:19:01.621Z"
     },
     "status": {
      "indicator": "none",
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-30T05:43:02+00:00"
+   "fetched_at": "2026-10-30T11:40:10+00:00"
   },
   "coinbase": {
    "source": "https://status.coinbase.com/api/v2/status.json",
@@ -83,35 +83,35 @@
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-30T05:43:02+00:00"
+   "fetched_at": "2026-10-30T11:40:10+00:00"
   },
   "robinhood": {
    "source": "https://status.robinhood.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "Robinhood",
-     "updated_at": "2026-10-29T17:04:29.445-07:00"
+     "updated_at": "2026-10-30T02:18:55.123-07:00"
     },
     "status": {
      "indicator": "none",
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-30T05:43:02+00:00"
+   "fetched_at": "2026-10-30T11:40:10+00:00"
   },
   "github": {
    "source": "https://www.githubstatus.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "GitHub",
-     "updated_at": "2026-10-30T00:04:37.964Z"
+     "updated_at": "2026-10-30T09:19:03.862Z"
     },
     "status": {
      "indicator": "none",
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-30T05:43:02+00:00"
+   "fetched_at": "2026-10-30T11:40:10+00:00"
   },
   "dropbox": {
    "source": "https://status.dropbox.com/api/v2/status.json",
@@ -125,49 +125,49 @@
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-30T05:43:02+00:00"
+   "fetched_at": "2026-10-30T11:40:10+00:00"
   },
   "figma": {
    "source": "https://status.figma.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "Figma",
-     "updated_at": "2026-10-30T00:04:29.449Z"
+     "updated_at": "2026-10-30T11:20:27.083Z"
     },
     "status": {
      "indicator": "none",
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-30T05:43:02+00:00"
+   "fetched_at": "2026-10-30T11:40:11+00:00"
   },
   "atlassian": {
    "source": "https://status.atlassian.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "Atlassian",
-     "updated_at": "2026-10-30T00:04:39.555Z"
+     "updated_at": "2026-10-30T09:19:08.858Z"
     },
     "status": {
      "indicator": "none",
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-30T05:43:03+00:00"
+   "fetched_at": "2026-10-30T11:40:11+00:00"
   },
   "duolingo": {
    "source": "https://status.duolingo.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "Duolingo",
-     "updated_at": "2026-10-29T20:04:30.609-04:00"
+     "updated_at": "2026-10-30T05:18:56.519-04:00"
     },
     "status": {
      "indicator": "none",
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-10-30T05:43:03+00:00"
+   "fetched_at": "2026-10-30T11:40:11+00:00"
   }
  }
 }
