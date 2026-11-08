@@ -1,33 +1,33 @@
 {
- "generated_at": "2026-11-08T19:53:19+00:00",
+ "generated_at": "2026-11-08T23:22:46+00:00",
  "services": {
   "discord": {
    "source": "https://discordstatus.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "Discord",
-     "updated_at": "2026-11-08T09:14:50.102-08:00"
+     "updated_at": "2026-11-08T13:24:29.590-08:00"
     },
     "status": {
      "indicator": "none",
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-11-08T19:53:19+00:00"
+   "fetched_at": "2026-11-08T23:22:46+00:00"
   },
   "reddit": {
    "source": "https://www.redditstatus.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "Reddit",
-     "updated_at": "2026-11-08T09:14:47.767-08:00"
+     "updated_at": "2026-11-08T13:24:26.910-08:00"
     },
     "status": {
      "indicator": "none",
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-11-08T19:53:19+00:00"
+   "fetched_at": "2026-11-08T23:22:46+00:00"
   },
   "chatgpt": {
    "source": "https://status.openai.com/api/v2/status.json",
@@ -41,21 +41,21 @@
      "indicator": "none"
     }
    },
-   "fetched_at": "2026-11-08T19:53:19+00:00"
+   "fetched_at": "2026-11-08T23:22:46+00:00"
   },
   "claude": {
    "source": "https://status.claude.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "Claude",
-     "updated_at": "2026-11-08T17:15:00.960Z"
+     "updated_at": "2026-11-08T22:39:53.006Z"
     },
     "status": {
      "indicator": "none",
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-11-08T19:53:19+00:00"
+   "fetched_at": "2026-11-08T23:22:46+00:00"
   },
   "epic-games": {
    "source": "https://status.epicgames.com/api/v2/status.json",
@@ -69,7 +69,7 @@
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-11-08T19:53:19+00:00"
+   "fetched_at": "2026-11-08T23:22:46+00:00"
   },
   "coinbase": {
    "source": "https://status.coinbase.com/api/v2/status.json",
@@ -83,21 +83,21 @@
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-11-08T19:53:20+00:00"
+   "fetched_at": "2026-11-08T23:22:47+00:00"
   },
   "robinhood": {
    "source": "https://status.robinhood.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "Robinhood",
-     "updated_at": "2026-11-08T09:14:33.733-08:00"
+     "updated_at": "2026-11-08T13:24:14.008-08:00"
     },
     "status": {
      "indicator": "none",
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-11-08T19:53:20+00:00"
+   "fetched_at": "2026-11-08T23:22:47+00:00"
   },
   "github": {
    "source": "https://www.githubstatus.com/api/v2/status.json",
@@ -111,7 +111,7 @@
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-11-08T19:53:20+00:00"
+   "fetched_at": "2026-11-08T23:22:47+00:00"
   },
   "dropbox": {
    "source": "https://status.dropbox.com/api/v2/status.json",
@@ -125,21 +125,21 @@
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-11-08T19:53:20+00:00"
+   "fetched_at": "2026-11-08T23:22:47+00:00"
   },
   "figma": {
    "source": "https://status.figma.com/api/v2/status.json",
    "data": {
     "page": {
      "name": "Figma",
-     "updated_at": "2026-11-08T17:14:33.892Z"
+     "updated_at": "2026-11-08T21:24:14.121Z"
     },
     "status": {
      "indicator": "none",
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-11-08T19:53:20+00:00"
+   "fetched_at": "2026-11-08T23:22:47+00:00"
   },
   "atlassian": {
    "source": "https://status.atlassian.com/api/v2/status.json",
@@ -153,7 +153,7 @@
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-11-08T19:53:20+00:00"
+   "fetched_at": "2026-11-08T23:22:48+00:00"
   },
   "duolingo": {
    "source": "https://status.duolingo.com/api/v2/status.json",
@@ -167,7 +167,7 @@
      "description": "All Systems Operational"
     }
    },
-   "fetched_at": "2026-11-08T19:53:20+00:00"
+   "fetched_at": "2026-11-08T23:22:48+00:00"
   }
  }
 }
